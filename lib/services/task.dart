@@ -4,9 +4,12 @@ import 'package:flutter_b15_firebase/%20models/task.dart';
 class TaskServices {
   ///Create Task
   Future createTask(TaskModel model) async {
+    DocumentReference docRef =
+        FirebaseFirestore.instance.collection('taskCollection').doc();
     return await FirebaseFirestore.instance
         .collection('taskCollection')
-        .add(model.toJson());
+        .doc(docRef.id)
+        .set(model.toJson(docRef.id));
   }
 
   ///Delete Task
@@ -37,6 +40,7 @@ class TaskServices {
   Stream<List<TaskModel>> getAllTasks() {
     return FirebaseFirestore.instance
         .collection('taskCollection')
+        .orderBy('createdAt', descending: true)
         .snapshots()
         .map((taskList) => taskList.docs
             .map((taskModel) => TaskModel.fromJson(taskModel.data()))

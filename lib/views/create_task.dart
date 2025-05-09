@@ -61,7 +61,11 @@ class _CreateTaskViewState extends State<CreateTaskView> {
                                     Text("Task has been created successfully"),
                                 actions: [
                                   TextButton(
-                                      onPressed: () {}, child: Text("Okay"))
+                                      onPressed: () {
+                                        Navigator.pop(context);
+                                        Navigator.pop(context);
+                                      },
+                                      child: Text("Okay"))
                                 ],
                               );
                             });
