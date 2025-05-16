@@ -5,6 +5,7 @@ import 'package:flutter_b15_firebase/services/task.dart';
 import 'package:flutter_b15_firebase/views/create_task.dart';
 import 'package:flutter_b15_firebase/views/get_completed_task.dart';
 import 'package:flutter_b15_firebase/views/get_in_completed_task.dart';
+import 'package:flutter_b15_firebase/views/update_task.dart';
 import 'package:provider/provider.dart';
 
 class GetAllTaskView extends StatelessWidget {
@@ -91,6 +92,17 @@ class GetAllTaskView extends StatelessWidget {
                           icon: Icon(
                             Icons.delete,
                             color: Colors.red,
+                          )),
+                      IconButton(
+                          onPressed: () {
+                            Navigator.push(
+                                context,
+                                MaterialPageRoute(
+                                    builder: (context) => UpdateTaskView(model: taskList[i],)));
+                          },
+                          icon: Icon(
+                            Icons.edit,
+                            color: Colors.blue,
                           )),
                     ],
                   ),
