@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_b15_firebase/%20models/category.dart';
 import 'package:flutter_b15_firebase/%20models/task.dart';
+import 'package:flutter_b15_firebase/services/category.dart';
 import 'package:flutter_b15_firebase/services/task.dart';
 
 class CreateTaskView extends StatefulWidget {
@@ -13,6 +15,24 @@ class _CreateTaskViewState extends State<CreateTaskView> {
   TextEditingController titleController = TextEditingController();
   TextEditingController descriptionController = TextEditingController();
   bool isLoading = false;
+
+  List<CategoryModel> categoryList = [];
+
+  CategoryModel? _selectedCategory;
+
+  getAllCategories() {
+    CategoryServices().getAllCategories().first.then((val) {
+      categoryList = val;
+      setState(() {});
+    });
+  }
+
+  @override
+  void initState() {
+    getAllCategories();
+    // TODO: implement initState
+    super.initState();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -34,6 +54,23 @@ class _CreateTaskViewState extends State<CreateTaskView> {
           SizedBox(
             height: 20,
           ),
+          DropdownButton(
+              items: categoryList
+                  .map((e) => DropdownMenuItem(
+                        child: Text(e.name.toString()),
+                        value: e,
+                      ))
+                  .toList(),
+              value: _selectedCategory,
+              isExpanded: true,
+              hint: Text("Select Category"),
+              onChanged: (val) {
+                _selectedCategory = val;
+                setState(() {});
+              }),
+          SizedBox(
+            height: 20,
+          ),
           isLoading
               ? Center(
                   child: CircularProgressIndicator(),
@@ -47,6 +84,7 @@ class _CreateTaskViewState extends State<CreateTaskView> {
                           .createTask(TaskModel(
                               title: titleController.text,
                               description: descriptionController.text,
+                              categoryID: _selectedCategory!.docId.toString(),
                               isCompleted: false,
                               createdAt: DateTime.now().millisecondsSinceEpoch))
                           .then((val) {

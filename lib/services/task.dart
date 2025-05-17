@@ -47,6 +47,17 @@ class TaskServices {
             .toList());
   }
 
+  ///Get Task by Category ID
+  Stream<List<TaskModel>> getTaskBtCategoryID(String categoryID) {
+    return FirebaseFirestore.instance
+        .collection('taskCollection')
+        .where('categoryID', isEqualTo: categoryID)
+        .snapshots()
+        .map((taskList) => taskList.docs
+            .map((taskModel) => TaskModel.fromJson(taskModel.data()))
+            .toList());
+  }
+
   ///Get Completed Tasks
   Stream<List<TaskModel>> getCompletedTasks() {
     return FirebaseFirestore.instance
