@@ -45,26 +45,26 @@ packages:
     dependency: "direct main"
     description:
       name: cloud_firestore
-      sha256: "89a5e32716794b6a8d0ec1b5dfda988194e92daedaa3f3bed66fa0d0a595252e"
+      sha256: d25c956be5261c14bc9a69c9662de8addb308376b4b53a64469aade52e7b02f8
       url: "https://pub.dev"
     source: hosted
-    version: "5.6.6"
+    version: "5.6.8"
   cloud_firestore_platform_interface:
     dependency: transitive
     description:
       name: cloud_firestore_platform_interface
-      sha256: "9f012844eb59be6827ed97415875c5a29ccacd28bc79bf85b4680738251a33df"
+      sha256: ee2b8f8c602ede36073afd3741e99cfea9dd982b4a44833daf665134d151c32a
       url: "https://pub.dev"
     source: hosted
-    version: "6.6.6"
+    version: "6.6.8"
   cloud_firestore_web:
     dependency: transitive
     description:
       name: cloud_firestore_web
-      sha256: b8b754269be0e907acd9ff63ad60f66b84c78d330ca1d7e474f86c9527ddc803
+      sha256: b99bc4f1f70787f694b73bc6fce238d4d6cc822c9b31ba8ef1578b180b6f77bc
       url: "https://pub.dev"
     source: hosted
-    version: "4.4.6"
+    version: "4.4.8"
   collection:
     dependency: transitive
     description:
@@ -142,14 +142,6 @@ packages:
     description: flutter
     source: sdk
     version: "0.0.0"
-  flutter_lints:
-    dependency: "direct dev"
-    description:
-      name: flutter_lints
-      sha256: "3f41d009ba7172d5ff9be5f6e6e6abb4300e263aab8866d2a0842ed2a70f8f0c"
-      url: "https://pub.dev"
-    source: hosted
-    version: "4.0.0"
   flutter_test:
     dependency: "direct dev"
     description: flutter
@@ -192,14 +184,6 @@ packages:
       url: "https://pub.dev"
     source: hosted
     version: "3.0.1"
-  lints:
-    dependency: transitive
-    description:
-      name: lints
-      sha256: "976c774dd944a42e83e2467f4cc670daef7eed6295b10b36ae8c85bcbf828235"
-      url: "https://pub.dev"
-    source: hosted
-    version: "4.0.0"
   matcher:
     dependency: transitive
     description:

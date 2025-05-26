@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_b15_firebase/views/create_task.dart';
 import 'package:flutter_b15_firebase/views/get_all_categories.dart';
 import 'package:flutter_b15_firebase/views/get_all_task.dart';
+import 'package:flutter_b15_firebase/views/login.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -37,7 +38,7 @@ class MyApp extends StatelessWidget {
         colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
         useMaterial3: true,
       ),
-      home: GetAllCategoriesView(),
+      home: LoginView(),
     );
   }
 }
