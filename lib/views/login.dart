@@ -1,7 +1,11 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_b15_firebase/providers/user.dart';
 import 'package:flutter_b15_firebase/services/auth.dart';
+import 'package:flutter_b15_firebase/services/user.dart';
 import 'package:flutter_b15_firebase/views/forgot_pwd.dart';
+import 'package:flutter_b15_firebase/views/get_all_categories.dart';
 import 'package:flutter_b15_firebase/views/register.dart';
+import 'package:provider/provider.dart';
 
 class LoginView extends StatefulWidget {
   LoginView({super.key});
@@ -19,6 +23,7 @@ class _LoginViewState extends State<LoginView> {
 
   @override
   Widget build(BuildContext context) {
+    var userProvider = Provider.of<UserProvider>(context);
     return Scaffold(
       appBar: AppBar(
         title: Text("Login"),
@@ -60,21 +65,33 @@ class _LoginViewState extends State<LoginView> {
                           .loginUser(
                               email: emailController.text,
                               password: pwdController.text)
-                          .then((val) {
-                        isLoading = false;
-                        setState(() {});
-                        showDialog(
-                            context: context,
-                            builder: (context) {
-                              return AlertDialog(
-                                title: Text("Message"),
-                                content: Text("Logged In"),
-                                actions: [
-                                  TextButton(
-                                      onPressed: () {}, child: Text("Okay"))
-                                ],
-                              );
-                            });
+                          .then((val) async {
+                        await UserServices()
+                            .getUser(val!.uid.toString())
+                            .then((userData) {
+                          isLoading = false;
+                          setState(() {});
+                          userProvider.setUser(userData);
+                          showDialog(
+                              context: context,
+                              builder: (context) {
+                                return AlertDialog(
+                                  title: Text("Message"),
+                                  content: Text("Logged In"),
+                                  actions: [
+                                    TextButton(
+                                        onPressed: () {
+                                          Navigator.push(
+                                              context,
+                                              MaterialPageRoute(
+                                                  builder: (context) =>
+                                                      GetAllCategoriesView()));
+                                        },
+                                        child: Text("Okay"))
+                                  ],
+                                );
+                              });
+                        });
                       });
                     } catch (e) {
                       isLoading = false;
@@ -98,8 +115,10 @@ class _LoginViewState extends State<LoginView> {
           ),
           ElevatedButton(
               onPressed: () {
-                Navigator.push(context,
-                    MaterialPageRoute(builder: (context) => ForgotPasswordView()));
+                Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                        builder: (context) => ForgotPasswordView()));
               },
               child: Text("Go to Forgot Password"))
         ],

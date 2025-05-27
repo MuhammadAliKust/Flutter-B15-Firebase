@@ -8,6 +8,7 @@ import 'package:flutter_b15_firebase/views/create_task.dart';
 import 'package:flutter_b15_firebase/views/get_completed_task.dart';
 import 'package:flutter_b15_firebase/views/get_in_completed_task.dart';
 import 'package:flutter_b15_firebase/views/get_task_by_category.dart';
+import 'package:flutter_b15_firebase/views/profile.dart';
 import 'package:flutter_b15_firebase/views/update_task.dart';
 import 'package:provider/provider.dart';
 
@@ -19,6 +20,12 @@ class GetAllCategoriesView extends StatelessWidget {
     return Scaffold(
       appBar: AppBar(
         title: Text("Get All Categories"),
+        actions: [
+          IconButton(onPressed: (){
+            Navigator.push(context, MaterialPageRoute(builder: (context)=>ProfileView()));
+          }, icon: Icon(Icons.person))
+
+        ],
       ),
       floatingActionButton: FloatingActionButton(
         onPressed: () {

@@ -4,10 +4,6 @@
 
 import 'dart:convert';
 
-UserModel userModelFromJson(String str) => UserModel.fromJson(json.decode(str));
-
-String userModelToJson(UserModel data) => json.encode(data.toJson());
-
 class UserModel {
   final String? docId;
   final String? name;
@@ -26,20 +22,20 @@ class UserModel {
   });
 
   factory UserModel.fromJson(Map<String, dynamic> json) => UserModel(
-    docId: json["docID"],
-    name: json["name"],
-    email: json["email"],
-    phone: json["phone"],
-    address: json["address"],
-    createdAt: json["createdAt"],
-  );
+        docId: json["docID"],
+        name: json["name"],
+        email: json["email"],
+        phone: json["phone"],
+        address: json["address"],
+        createdAt: json["createdAt"],
+      );
 
-  Map<String, dynamic> toJson() => {
-    "docID": docId,
-    "name": name,
-    "email": email,
-    "phone": phone,
-    "address": address,
-    "createdAt": createdAt,
-  };
+  Map<String, dynamic> toJson(String docID) => {
+        "docID": docID,
+        "name": name,
+        "email": email,
+        "phone": phone,
+        "address": address,
+        "createdAt": createdAt,
+      };
 }
