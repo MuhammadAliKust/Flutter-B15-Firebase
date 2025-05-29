@@ -19,4 +19,15 @@ class UserServices {
         .get()
         .then((val) => UserModel.fromJson(val.data()!));
   }
+
+  Future updateUser(UserModel model) async {
+    return await FirebaseFirestore.instance
+        .collection('b15UserCollection')
+        .doc(model.docId.toString())
+        .update({
+      'name': model.name,
+      'address': model.address,
+      'phone': model.phone
+    });
+  }
 }
