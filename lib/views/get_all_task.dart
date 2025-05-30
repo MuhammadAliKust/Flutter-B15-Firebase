@@ -1,6 +1,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_b15_firebase/%20models/task.dart';
+import 'package:flutter_b15_firebase/providers/user.dart';
 import 'package:flutter_b15_firebase/services/task.dart';
 import 'package:flutter_b15_firebase/views/create_task.dart';
 import 'package:flutter_b15_firebase/views/get_completed_task.dart';
@@ -13,6 +14,7 @@ class GetAllTaskView extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    var user = Provider.of<UserProvider>(context);
     return Scaffold(
       appBar: AppBar(
         title: Text("Get All Task"),
@@ -43,7 +45,7 @@ class GetAllTaskView extends StatelessWidget {
         child: Icon(Icons.add),
       ),
       body: StreamProvider.value(
-        value: TaskServices().getAllTasks(),
+        value: TaskServices().getAllTasks(user.getUser()!.docId.toString()),
         initialData: [TaskModel()],
         builder: (context, child) {
           List<TaskModel> taskList = context.watch<List<TaskModel>>();

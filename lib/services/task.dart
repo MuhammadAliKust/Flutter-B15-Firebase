@@ -37,9 +37,10 @@ class TaskServices {
   }
 
   ///Get All Tasks
-  Stream<List<TaskModel>> getAllTasks() {
+  Stream<List<TaskModel>> getAllTasks(String userID) {
     return FirebaseFirestore.instance
         .collection('taskCollection')
+        .where('userID', isEqualTo: userID)
         .orderBy('createdAt', descending: true)
         .snapshots()
         .map((taskList) => taskList.docs
@@ -48,10 +49,13 @@ class TaskServices {
   }
 
   ///Get Task by Category ID
-  Stream<List<TaskModel>> getTaskBtCategoryID(String categoryID) {
+  Stream<List<TaskModel>> getTaskBtCategoryID(String categoryID, String userID) {
     return FirebaseFirestore.instance
         .collection('taskCollection')
         .where('categoryID', isEqualTo: categoryID)
+        .where('userID', isEqualTo: userID)
+
+        // .orderBy('createdAt', descending: true)
         .snapshots()
         .map((taskList) => taskList.docs
             .map((taskModel) => TaskModel.fromJson(taskModel.data()))

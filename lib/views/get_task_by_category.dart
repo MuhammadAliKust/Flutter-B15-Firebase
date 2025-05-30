@@ -2,6 +2,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_b15_firebase/%20models/category.dart';
 import 'package:flutter_b15_firebase/%20models/task.dart';
+import 'package:flutter_b15_firebase/providers/user.dart';
 import 'package:flutter_b15_firebase/services/task.dart';
 import 'package:flutter_b15_firebase/views/create_task.dart';
 import 'package:flutter_b15_firebase/views/get_completed_task.dart';
@@ -16,12 +17,13 @@ class GetTaskByCategoryID extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    var user = Provider.of<UserProvider>(context);
     return Scaffold(
       appBar: AppBar(
         title: Text("Get Category Task"),
       ),
       body: StreamProvider.value(
-        value: TaskServices().getTaskBtCategoryID(model.docId.toString()),
+        value: TaskServices().getTaskBtCategoryID(model.docId.toString(),user.getUser()!.docId.toString()),
         initialData: [TaskModel()],
         builder: (context, child) {
           List<TaskModel> taskList = context.watch<List<TaskModel>>();
